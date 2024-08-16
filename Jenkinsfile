@@ -30,8 +30,10 @@ pipeline {
                     git config --global user.email "szxw1209@gmail.com"
                     git add deployment.yaml
                     git commit -m "Updated Deployment Manifest"
-                    git push https://github.com/zqhgithubuser/a-reddit-clone-gitops
                 """
+                withCredentials([gitUsernamePassword(credentialsId: 'Github', gitToolName: 'Default')]) {
+                    sh "git push https://github.com/zqhgithubuser/a-reddit-clone-gitops main"
+                }
             }
          }
     }
